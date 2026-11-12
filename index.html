@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>數位科技概論（上）隨堂測驗智能學習平台 - 第3章 硬體架構</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand" onclick="switchTab('overview'); return false;">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <h1>數位科技概論隨堂測驗平台</h1>
+          <p>第 3 章 系統平台的組成架構－硬體</p>
+        </div>
+      </a>
+
+      <!-- 導覽切換按鈕群 -->
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="overview">
+          <span>📊</span> 考情診斷
+        </button>
+        <button class="nav-tab" data-tab="quiz">
+          <span>📝</span> 隨堂互動測驗
+        </button>
+        <button class="nav-tab" data-tab="notes">
+          <span>📖</span> 核心觀念重點
+        </button>
+        <button class="nav-tab" data-tab="flashcards">
+          <span>🎴</span> 抽認記憶卡
+        </button>
+        <button class="nav-tab" data-tab="exam">
+          <span>🖼️</span> 檢視原始考卷
+        </button>
+      </nav>
+
+      <!-- 右側工具 (主題、音效) -->
+      <div class="nav-actions">
+        <button class="icon-btn" id="sound-toggle-btn" title="切換音效">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button class="icon-btn" id="theme-toggle-btn" title="切換深淺色主題">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主體頁面內容 -->
+  <main class="main-wrapper">
+
+    <!-- 分頁 1: 考情診斷與首頁 -->
+    <section id="pane-overview" class="tab-pane active">
+      <!-- 考卷資訊橫幅 -->
+      <div class="banner-card">
+        <div class="banner-content">
+          <div>
+            <div class="banner-tags">
+              <span class="badge badge-primary">旗立發行 · 第 3 回隨堂測驗</span>
+              <span class="badge badge-warning">範圍：第 3 章 硬體架構</span>
+              <span class="badge badge-danger">原卷扣分：-44 分</span>
+            </div>
+            <h2 class="banner-title">數位科技概論（上）隨堂測驗卷</h2>
+            <p class="banner-subtitle">
+              對照原試卷批改重點，專攻 11 道失分陷阱題，快速補足五大單元、記憶體階層與周邊介面核心概念！
+            </p>
+            <div class="banner-meta">
+              <span>👤 學生：<strong>吳同學</strong></span>
+              <span>🏫 班級：<strong>資電科 一年仁班</strong></span>
+              <span>🔢 座號：<strong>12 號</strong></span>
+              <span>📝 總題數：<strong>25 題（每題 4 分）</strong></span>
+            </div>
+          </div>
+          <div class="banner-score-box">
+            <div class="score-label">原考卷實得成績</div>
+            <div class="score-number">56</div>
+            <div class="score-sub">滿分 100 分 · 答錯 11 題</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 統計數據格線 -->
+      <div class="stats-grid" id="overview-stats-grid">
+        <!-- 由 JS 動態注入 -->
+      </div>
+
+      <!-- 快速啟動動作卡片 -->
+      <div class="quick-launch-section">
+        <div class="section-header">
+          <h3 class="section-title">🚀 專屬搶分快速行動</h3>
+        </div>
+        <div class="quick-launch-grid">
+          <div class="action-card card-primary" id="btn-launch-wrong">
+            <div>
+              <div class="action-card-header">
+                <div class="action-card-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🎯</div>
+                <span class="badge badge-danger">奪回 44 分</span>
+              </div>
+              <h4 class="action-card-title">原考卷 11 題錯題專攻</h4>
+              <p class="action-card-desc">
+                針對在隨堂考卷中失分的第 2, 3, 7, 10, 12, 13, 17, 19, 20, 22, 24 題進行專項突破，強化弱點。
+              </p>
+            </div>
+            <div class="action-card-footer" style="color: #ef4444;">
+              <span>立即開始錯題重練</span>
+              <span>➔</span>
+            </div>
+          </div>
+
+          <div class="action-card card-secondary" id="btn-launch-all">
+            <div>
+              <div class="action-card-header">
+                <div class="action-card-icon" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">📝</div>
+                <span class="badge badge-primary">25 題全覆蓋</span>
+              </div>
+              <h4 class="action-card-title">全卷 25 題模擬測驗</h4>
+              <p class="action-card-desc">
+                完整體驗標準隨堂測驗，提供即時詳解學習與考場計分雙模式，檢視章節總體吸收程度。
+              </p>
+            </div>
+            <div class="action-card-footer">
+              <span>進入完整測驗</span>
+              <span>➔</span>
+            </div>
+          </div>
+
+          <div class="action-card card-secondary" id="btn-launch-notes">
+            <div>
+              <div class="action-card-header">
+                <div class="action-card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">📖</div>
+                <span class="badge badge-success">重點整理</span>
+              </div>
+              <h4 class="action-card-title">核心考點講義筆記</h4>
+              <p class="action-card-desc">
+                精煉整理五大單元、SRAM/DRAM 對比、ROM演進、記憶體速度天梯與周邊連接埠圖表。
+              </p>
+            </div>
+            <div class="action-card-footer" style="color: #10b981;">
+              <span>查閱精華筆記</span>
+              <span>➔</span>
+            </div>
+          </div>
+
+          <div class="action-card card-secondary" id="btn-launch-flashcards">
+            <div>
+              <div class="action-card-header">
+                <div class="action-card-icon" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">🎴</div>
+                <span class="badge" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd;">考前速記</span>
+              </div>
+              <h4 class="action-card-title">抽認翻牌記憶卡</h4>
+              <p class="action-card-desc">
+                3D 翻轉問答卡片，利用問答形式在 3 分鐘內快速重溫高頻考點與秒殺口訣。
+              </p>
+            </div>
+            <div class="action-card-footer" style="color: #8b5cf6;">
+              <span>開始翻牌記憶</span>
+              <span>➔</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 道失分錯題清單 -->
+      <div class="wrong-questions-section">
+        <div class="section-header">
+          <h3 class="section-title">
+            <span>🚨 原考卷失分題詳細清單 (共 11 題，失 44 分)</span>
+          </h3>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+          下方標記了您在原始考卷上的作答選項與正確解答。點擊任意一題右側的按鈕即可直接跳轉至該題進行觀念解析與重練！
+        </p>
+        <div style="overflow-x: auto;">
+          <table class="wrong-list-table">
+            <thead>
+              <tr>
+                <th>題號</th>
+                <th>核心範疇</th>
+                <th>題目摘要</th>
+                <th>原卷所選</th>
+                <th>正確解答</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="wrong-questions-tbody">
+              <!-- 由 JS 動態注入 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分頁 2: 隨堂互動測驗 -->
+    <section id="pane-quiz" class="tab-pane">
+      <div class="quiz-container">
+        <!-- 主作答卡片 -->
+        <div class="quiz-main">
+          <!-- 測驗頂部工具列 -->
+          <div class="quiz-toolbar">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <label for="quiz-category-filter" style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+                題庫篩選：
+              </label>
+              <select id="quiz-category-filter" class="filter-select">
+                <option value="all">📚 全部 25 題完整測驗</option>
+                <option value="wrong" selected>🚨 原考卷錯題專攻 (11題)</option>
+                <option value="bookmarked">⭐ 我的收藏題目</option>
+                <option value="five_units">🖥️ 電腦五大單元架構 (9題)</option>
+                <option value="cpu_metrics">⚡ CPU 規格與效能指標 (4題)</option>
+                <option value="memory_hierarchy">🧠 記憶體階層與半導體 (5題)</option>
+                <option value="storage">💾 儲存裝置 SSD vs HDD (2題)</option>
+                <option value="peripherals">🔌 介面連接埠與周邊 (5題)</option>
+              </select>
+            </div>
+
+            <!-- 模式切換 (即時學習 vs 考場模擬) -->
+            <div class="mode-toggle-group">
+              <button class="mode-btn active" data-mode="learning" title="每題點擊選項立即得知對錯與解析">
+                💡 即時解題模式
+              </button>
+              <button class="mode-btn" data-mode="exam" title="全部作答完後統一交卷結算">
+                ⏱️ 考場模擬模式
+              </button>
+            </div>
+          </div>
+
+          <!-- 題目卡頂部 -->
+          <div class="question-header">
+            <span class="question-number-badge" id="quiz-q-number">第 1 題</span>
+            <button class="question-bookmark-btn" id="quiz-bookmark-btn" title="收藏此題">☆</button>
+          </div>
+
+          <!-- 原卷錯題失分警示條 -->
+          <div class="original-wrong-alert" id="quiz-original-wrong-alert" style="display: none;">
+            <!-- JS 注入 -->
+          </div>
+
+          <!-- 題目文字 -->
+          <div class="question-text" id="quiz-question-text">題目載入中...</div>
+
+          <!-- 選項容器 -->
+          <div class="options-list" id="quiz-options-list">
+            <!-- JS 注入選項 -->
+          </div>
+
+          <!-- 即時解析面板 -->
+          <div class="explanation-card" id="quiz-explanation-card" style="display: none;">
+            <!-- JS 注入解析 -->
+          </div>
+
+          <!-- 上下題與控制導覽列 -->
+          <div class="quiz-nav-actions">
+            <button class="btn btn-secondary" id="btn-prev-q">
+              <span>⬅</span> 上一題
+            </button>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary" id="btn-restart-quiz" title="清除所有答案重作">
+                🔄 重練本題庫
+              </button>
+              <button class="btn btn-primary" id="btn-submit-exam">
+                📊 交卷結算
+              </button>
+            </div>
+            <button class="btn btn-primary" id="btn-next-q">
+              下一題 <span>➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 右側題號導覽面板 -->
+        <aside class="quiz-sidebar">
+          <div class="sidebar-title">
+            <span>題號快速切換</span>
+            <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);" id="quiz-progress-text"></span>
+          </div>
+
+          <div class="grid-numbers" id="quiz-number-grid">
+            <!-- JS 注入題號 -->
+          </div>
+
+          <div class="legend-list">
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--success);"></span>
+              <span>綠色：作答正確</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--danger);"></span>
+              <span>紅色：作答錯誤</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background: var(--primary);"></span>
+              <span>藍框：當前檢視題</span>
+            </div>
+            <div class="legend-item">
+              <span style="color: var(--warning); font-size: 0.9rem;">★</span>
+              <span>星號：已收藏重點題</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 分頁 3: 核心觀念重點講義 -->
+    <section id="pane-notes" class="tab-pane">
+      <div class="notes-container" id="notes-content-container">
+        <!-- JS 注入講義筆記 -->
+      </div>
+    </section>
+
+    <!-- 分頁 4: 抽認翻牌記憶卡 -->
+    <section id="pane-flashcards" class="tab-pane">
+      <div class="flashcards-container">
+        <div class="flashcard-progress">
+          <span id="fc-progress-text">第 1 / 10 張</span>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="fc-progress-fill" style="width: 0%;"></div>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--primary);">點擊卡片可 3D 翻轉</span>
+        </div>
+
+        <!-- 3D 翻牌卡體 -->
+        <div class="flip-card-wrapper" id="flip-card-wrapper">
+          <div class="flip-card-inner">
+            <!-- 正面 (題目) -->
+            <div class="flip-card-face flip-card-front">
+              <span class="badge badge-primary flip-card-tag" id="fc-card-tag">觀念</span>
+              <div class="flip-card-question" id="fc-front-question">載入中...</div>
+              <div class="flip-card-hint">
+                <span>🔄 點擊卡片任何位置翻看解答</span>
+              </div>
+            </div>
+
+            <!-- 反面 (解答) -->
+            <div class="flip-card-face flip-card-back">
+              <span class="badge badge-success flip-card-tag">解答與考點</span>
+              <div class="flip-card-answer" id="fc-back-answer">載入中...</div>
+              <div class="flip-card-hint" style="color: #94a3b8;">
+                <span>🔄 再次點擊卡片翻回正面</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 記憶卡動作列 -->
+        <div class="flashcard-actions">
+          <button class="btn btn-secondary" id="fc-prev-btn">
+            <span>⬅</span> 上一張
+          </button>
+          <button class="btn btn-secondary" id="fc-master-btn">
+            ⭕ 標記為已掌握
+          </button>
+          <button class="btn btn-primary" id="fc-next-btn">
+            下一張 <span>➔</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分頁 5: 原始考卷對照檢視 -->
+    <section id="pane-exam" class="tab-pane">
+      <div class="exam-viewer-container">
+        <div class="exam-viewer-nav">
+          <button class="btn btn-primary active" id="exam-page-1-btn">
+            📄 第 1 頁（第 1 ~ 13 題）
+          </button>
+          <button class="btn btn-secondary" id="exam-page-2-btn">
+            📄 第 2 頁（第 14 ~ 25 題）
+          </button>
+        </div>
+        <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          可即時對照高解析度原始隨堂測驗卷紙本批改與紅筆備註
+        </p>
+        <div class="exam-img-wrapper">
+          <img src="assets/exam_page1.jpg" alt="原始考卷第1頁" class="exam-img" id="exam-viewer-img">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 測驗結算彈窗 -->
+  <div class="modal-overlay" id="exam-result-modal">
+    <div class="modal-card">
+      <h3 class="modal-title">🎉 測驗結算報告</h3>
+      <div class="modal-score" id="modal-score-val">100分</div>
+      <p id="modal-score-desc" style="font-weight: 600; color: var(--text-main); font-size: 1.05rem;"></p>
+      
+      <div class="modal-stats" id="modal-score-details">
+        <!-- 結算明細 -->
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem;">
+        <button class="btn btn-secondary" onclick="closeModal()">
+          檢視答題卡與錯題
+        </button>
+        <button class="btn btn-primary" onclick="closeModal(); startQuizWithFilter('wrong');">
+          專攻 11 題錯題
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <p>數位科技概論（上）隨堂測驗智能學習平台 · 專為資訊科技學科設計</p>
+    <p style="margin-top: 0.25rem; font-size: 0.75rem; color: var(--text-subtle);">
+      支援離線練習 · 自動進度儲存 · Web Audio 聲效回饋
+    </p>
+  </footer>
+
+  <!-- 引入資料與核心應用邏輯 -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+
